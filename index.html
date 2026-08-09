@@ -196,6 +196,9 @@
       align-items: center;
       gap: 38px;
       list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .nav-links a {
@@ -590,6 +593,7 @@
     .file-lang-row {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       margin-top: 16px;
       font-size: 0.9rem;
@@ -702,12 +706,24 @@
       opacity: 0.5;
     }
 
+    .input-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-actions,
     .output-actions {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-top: 12px;
       flex-wrap: wrap;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1.04); }
     }
 
     .action-btn {
@@ -838,7 +854,7 @@
       background: var(--bg2);
       border-radius: 14px;
       padding: 5px;
-      margin-bottom: 32px;
+      margin: 0 auto 32px auto;
       width: fit-content;
       border: 1.5px solid var(--border);
     }
@@ -1543,6 +1559,372 @@
         display: none;
       }
     }
+
+    /* ─── Auth Navigation & Buttons ───────────────────────────── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+
+    .nav-auth-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all var(--transition);
+      outline: none;
+      border: none;
+    }
+
+    .btn-login {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-login:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--accent2);
+    }
+
+    .btn-signup {
+      background: linear-gradient(135deg, var(--primary), var(--primary-h));
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(139, 124, 246, 0.3);
+    }
+
+    .btn-signup:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(139, 124, 246, 0.45);
+    }
+
+    .btn-logout {
+      background: transparent;
+      color: #ef4444;
+      border: 1.5px solid rgba(239, 68, 68, 0.25);
+      padding: 6px 14px;
+      font-size: 0.82rem;
+    }
+
+    .btn-logout:hover {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: #ef4444;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--accent2);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .user-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.75rem;
+    }
+
+    /* ─── Locked Journal Card ─────────────────────────────────── */
+    .journal-locked-card {
+      background: linear-gradient(145deg, var(--bg2), var(--card));
+      border: 2px dashed var(--border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .locked-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--accent2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .locked-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .locked-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .locked-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-auth-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-h));
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 4px 16px rgba(139, 124, 246, 0.3);
+    }
+
+    .btn-auth-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(139, 124, 246, 0.45);
+    }
+
+    .btn-auth-secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-auth-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Auth Modal ────────────────────────────────────────── */
+    .auth-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 12, 35, 0.65);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .auth-modal-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 440px;
+      padding: 32px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: scaleUp 0.25s ease;
+    }
+
+    @keyframes scaleUp {
+      from { transform: scale(0.94); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .auth-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .auth-modal-close:hover {
+      color: var(--text);
+      background: var(--border);
+    }
+
+    .auth-modal-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .auth-modal-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .auth-modal-header h3 {
+      font-size: 1.35rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .auth-modal-header p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 20px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .auth-tab.active {
+      background: var(--card);
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      outline: none;
+      transition: all var(--transition);
+    }
+
+    .form-group input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(139, 124, 246, 0.15);
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-h));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 4px 14px rgba(139, 124, 246, 0.3);
+      margin-top: 6px;
+    }
+
+    .auth-submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(139, 124, 246, 0.45);
+    }
+
+    .auth-switch-prompt {
+      text-align: center;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+
+    .auth-switch-prompt a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-error-msg {
+      padding: 10px 14px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      color: #ef4444;
+      font-size: 0.83rem;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .auth-success-msg {
+      padding: 10px 14px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      color: #10b981;
+      font-size: 0.83rem;
+      margin-bottom: 16px;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -1567,7 +1949,12 @@
       <li><a href="https://github.com/Priyanshi0907/Eng-French-Translator" target="_blank" rel="noopener">GitHub</a>
       </li>
     </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme"></button>
+    <div class="nav-right">
+      <div class="nav-auth-container" id="navAuthContainer">
+        <!-- Dynamic Auth Buttons or User Badge -->
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme"></button>
+    </div>
   </nav>
 
   <!-- ─── Hero ──────────────────────────────────────────────── -->
@@ -1666,10 +2053,36 @@
             <select class="lang-select" id="tgtLangSelect" aria-label="Target language"></select>
           </div>
           <div class="translator-body">
-            <div class="textarea-wrap">
-              <textarea id="inputText" maxlength="500" placeholder="Start typing in English..."
-                aria-label="Source text input"></textarea>
-              <span class="char-count" id="charCount">0 / 500</span>
+            <div class="input-wrap">
+              <div class="textarea-wrap">
+                <textarea id="inputText" maxlength="500" placeholder="Start typing in English..."
+                  aria-label="Source text input"></textarea>
+                <span class="char-count" id="charCount">0 / 500</span>
+              </div>
+              <div class="input-actions" id="inputActions">
+                <button class="action-btn" id="inputCopyBtn" title="Copy source text">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="13" height="13" rx="2" />
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                  </svg>
+                  Copy
+                </button>
+                <button class="action-btn" id="inputSpeakBtn" title="Listen to source text">
+                  <svg viewBox="0 0 24 24">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
+                  </svg>
+                  Speak
+                </button>
+                <button class="action-btn" id="inputClearBtn" title="Clear text">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="3 6 5 6 21 6" />
+                    <path
+                      d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" />
+                  </svg>
+                  Clear
+                </button>
+              </div>
             </div>
             <div class="output-wrap">
               <div class="output-box" id="outputBox">
@@ -1819,16 +2232,9 @@
           </div>
         </div>
 
-        <!-- Translation Journal -->
-        <div class="journal-section">
-          <div class="journal-title">
-            &#128214; Recent Translations
-            <button class="action-btn" id="clearJournalBtn"
-              style="margin-left:auto;font-size:0.78rem;padding:5px 12px;">Clear All</button>
-          </div>
-          <div id="journalList" class="journal-list">
-            <div class="journal-empty">No translations yet. Start translating to build your journal!</div>
-          </div>
+        <!-- Translation Journal (Auth Gated) -->
+        <div class="journal-section" id="journalSection">
+          <!-- Dynamically populated based on auth state -->
         </div>
       </div>
     </div>
@@ -2068,10 +2474,120 @@
     const srcLangSelect = document.getElementById('srcLangSelect');
     const tgtLangSelect = document.getElementById('tgtLangSelect');
     const fileTgtLangSelect = document.getElementById('fileTgtLangSelect');
+    const inputCopyBtn = document.getElementById('inputCopyBtn');
+    const inputSpeakBtn = document.getElementById('inputSpeakBtn');
+    const inputClearBtn = document.getElementById('inputClearBtn');
     const copyBtn = document.getElementById('copyBtn');
     const speakBtn = document.getElementById('speakBtn');
     const clearBtn = document.getElementById('clearBtn');
     const successToast = document.getElementById('successToast');
+
+    // ── Web Speech API TTS Engine with BCP-47 Mapping ────────
+    const BCP47_MAP = {
+      "en": "en-US", "fr": "fr-FR", "es": "es-ES", "de": "de-DE", "it": "it-IT", "pt": "pt-BR",
+      "nl": "nl-NL", "ru": "ru-RU", "zh": "zh-CN", "zh-Hant": "zh-TW", "yue": "zh-HK", "ja": "ja-JP",
+      "ko": "ko-KR", "ar": "ar-SA", "hi": "hi-IN", "bn": "bn-BD", "ur": "ur-PK", "fa": "fa-IR",
+      "tr": "tr-TR", "vi": "vi-VN", "th": "th-TH", "id": "id-ID", "ms": "ms-MY", "tl": "fil-PH",
+      "sw": "sw-KE", "am": "am-ET", "ha": "ha-NG", "yo": "yo-NG", "ig": "ig-NG", "zu": "zu-ZA",
+      "xh": "xh-ZA", "af": "af-ZA", "sv": "sv-SE", "no": "nb-NO", "nn": "nn-NO", "da": "da-DK",
+      "fi": "fi-FI", "pl": "pl-PL", "cs": "cs-CZ", "sk": "sk-SK", "hu": "hu-HU", "ro": "ro-RO",
+      "bg": "bg-BG", "uk": "uk-UA", "el": "el-GR", "he": "he-IL", "ka": "ka-GE", "hy": "hy-AM",
+      "az": "az-AZ", "kk": "kk-KZ", "ky": "ky-KG", "uz": "uz-UZ", "tk": "tk-TM", "tg": "tg-TJ",
+      "mn": "mn-MN", "ne": "ne-NP", "si": "si-LK", "ta": "ta-IN", "te": "te-IN", "kn": "kn-IN",
+      "ml": "ml-IN", "mr": "mr-IN", "gu": "gu-IN", "pa": "pa-IN", "or": "or-IN", "as": "as-IN",
+      "my": "my-MM", "km": "km-KH", "lo": "lo-LA", "bo": "bo-CN", "dz": "dz-BT", "sq": "sq-AL",
+      "mk": "mk-MK", "sr": "sr-RS", "hr": "hr-HR", "bs": "bs-BA", "sl": "sl-SI", "et": "et-EE",
+      "lv": "lv-LV", "lt": "lt-LT", "ga": "ga-IE", "gd": "gd-GB", "cy": "cy-GB", "is": "is-IS",
+      "fo": "fo-FO", "mt": "mt-MT", "eu": "eu-ES", "ca": "ca-ES", "gl": "gl-ES", "oc": "oc-FR",
+      "eo": "eo", "be": "be-BY", "ceb": "ceb-PH", "jv": "jv-ID", "su": "su-ID", "mg": "mg-MG",
+      "so": "so-SO", "rw": "rw-RW", "rn": "rn-BI", "ny": "ny-MW", "sn": "sn-ZW", "st": "st-LS",
+      "tn": "tn-ZA", "ts": "ts-ZA", "ss": "ss-SZ", "lg": "lg-UG", "ln": "ln-CD", "wo": "wo-SN",
+      "sg": "sg-CF", "ti": "ti-ET", "om": "om-ET", "sd": "sd-PK", "ps": "ps-AF", "ku": "ku-TR",
+      "ckb": "ckb-IQ", "yi": "yi-001", "sa": "sa-IN", "qu": "qu-PE", "gn": "gn-PY", "ay": "ay-BO",
+      "ht": "ht-HT", "lb": "lb-LU", "mi": "mi-NZ", "sm": "sm-WS", "fj": "fj-FJ", "war": "war-PH",
+      "ilo": "ilo-PH", "ast": "ast-ES", "scn": "scn-IT"
+    };
+
+    let availableVoices = [];
+    function updateVoicesList() {
+      if ('speechSynthesis' in window) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+    }
+    if ('speechSynthesis' in window) {
+      updateVoicesList();
+      window.speechSynthesis.onvoiceschanged = updateVoicesList;
+    }
+
+    function speakText(text, langCode, btnElement) {
+      if (!('speechSynthesis' in window)) {
+        alert('Speech Synthesis is not supported in this browser.');
+        return;
+      }
+      const cleanText = (text || '').trim();
+      if (!cleanText) return;
+
+      if (window.speechSynthesis.speaking && btnElement && btnElement.dataset.speaking === 'true') {
+        window.speechSynthesis.cancel();
+        resetSpeakBtn(btnElement);
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utter = new SpeechSynthesisUtterance(cleanText);
+      const localeTag = BCP47_MAP[langCode] || langCode || 'en-US';
+      const langPrefix = (langCode || 'en').split('-')[0].toLowerCase();
+      utter.lang = localeTag;
+
+      if (availableVoices.length === 0) updateVoicesList();
+
+      let matchedVoice = availableVoices.find(v =>
+        v.lang.toLowerCase().replace('_', '-') === localeTag.toLowerCase()
+      );
+      if (!matchedVoice) {
+        matchedVoice = availableVoices.find(v =>
+          v.lang.toLowerCase().startsWith(langPrefix)
+        );
+      }
+      if (matchedVoice) {
+        utter.voice = matchedVoice;
+        utter.lang = matchedVoice.lang;
+      }
+
+      if (btnElement) {
+        btnElement.dataset.speaking = 'true';
+        btnElement.style.color = 'var(--primary)';
+        btnElement.style.borderColor = 'var(--primary)';
+        btnElement.dataset.origHtml = btnElement.innerHTML;
+
+        btnElement.innerHTML = `
+          <svg viewBox="0 0 24 24" style="animation: pulse 1s infinite alternate; width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.8">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
+          </svg>
+          Speaking...
+        `;
+
+        utter.onend = () => resetSpeakBtn(btnElement);
+        utter.onerror = (e) => {
+          console.warn('TTS error:', e);
+          resetSpeakBtn(btnElement);
+        };
+      }
+
+      window.speechSynthesis.speak(utter);
+    }
+
+    function resetSpeakBtn(btnElement) {
+      if (!btnElement) return;
+      btnElement.dataset.speaking = 'false';
+      btnElement.style.color = '';
+      btnElement.style.borderColor = '';
+      if (btnElement.dataset.origHtml) {
+        btnElement.innerHTML = btnElement.dataset.origHtml;
+      }
+    }
 
     inputEl.addEventListener('input', () => {
       charCount.textContent = inputEl.value.length + ' / 500';
@@ -2177,6 +2693,33 @@
 
     loadLanguages();
 
+    // ── Left Side Action Handlers ────────────────────────────
+    inputCopyBtn.addEventListener('click', async () => {
+      const val = inputEl.value.trim();
+      if (!val) return;
+      try {
+        await navigator.clipboard.writeText(val);
+        inputCopyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+        setTimeout(() => {
+          inputCopyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+        }, 1800);
+      } catch (e) { }
+    });
+
+    inputSpeakBtn.addEventListener('click', () => {
+      const val = inputEl.value.trim();
+      if (!val) return;
+      speakText(val, srcLangSelect.value, inputSpeakBtn);
+    });
+
+    inputClearBtn.addEventListener('click', () => {
+      inputEl.value = '';
+      charCount.textContent = '0 / 500';
+      resetOutput();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    });
+
+    // ── Right Side Action Handlers ───────────────────────────
     copyBtn.addEventListener('click', async () => {
       if (!outputText) return;
       try {
@@ -2190,42 +2733,224 @@
 
     speakBtn.addEventListener('click', () => {
       if (!outputText) return;
-      const utter = new SpeechSynthesisUtterance(outputText);
-      const tgt = tgtLangSelect.value;
-      utter.lang = tgt === 'zh-Hant' ? 'zh-TW' : tgt === 'zh' ? 'zh-CN' : tgt;
-      window.speechSynthesis.speak(utter);
-      speakBtn.style.color = 'var(--primary)';
-      utter.onend = () => { speakBtn.style.color = ''; };
+      speakText(outputText, tgtLangSelect.value, speakBtn);
     });
 
     clearBtn.addEventListener('click', () => {
       inputEl.value = '';
       charCount.textContent = '0 / 500';
       resetOutput();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     });
 
-    // ── Translation Journal ───────────────────────────────────
-    let journal = [];
-    try { journal = JSON.parse(localStorage.getItem('linguo-journal') || '[]'); } catch (e) { }
-    renderJournal();
+    // ── User Authentication State ─────────────────────────────
+    let currentUser = null;
+    try {
+      currentUser = JSON.parse(localStorage.getItem('linguo-current-user') || 'null');
+    } catch (e) { }
 
-    function addToJournal(src, tgt, srcLang, tgtLang) {
-      journal.unshift({ id: Date.now(), src, tgt, srcLang, tgtLang, ts: new Date().toISOString(), fav: false });
-      if (journal.length > 10) journal = journal.slice(0, 10);
-      saveJournal();
+    function getRegisteredUsers() {
+      try {
+        return JSON.parse(localStorage.getItem('linguo-registered-users') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRegisteredUsers(users) {
+      try {
+        localStorage.setItem('linguo-registered-users', JSON.stringify(users));
+      } catch (e) { }
+    }
+
+    function updateAuthUI() {
+      const navContainer = document.getElementById('navAuthContainer');
+      if (navContainer) {
+        if (currentUser) {
+          const displayName = currentUser.name || currentUser.email.split('@')[0];
+          navContainer.innerHTML = `
+            <div class="user-badge" title="${escHtml(currentUser.email)}">
+              <span class="user-avatar">${escHtml(displayName.charAt(0).toUpperCase())}</span>
+              <span class="user-name">${escHtml(displayName)}</span>
+            </div>
+            <button class="nav-btn btn-logout" onclick="logoutUser()">Sign Out</button>
+          `;
+        } else {
+          navContainer.innerHTML = `
+            <button class="nav-btn btn-login" onclick="openAuthModal('login')">Sign In</button>
+            <button class="nav-btn btn-signup" onclick="openAuthModal('signup')">Sign Up</button>
+          `;
+        }
+      }
       renderJournal();
     }
 
-    function saveJournal() {
-      try { localStorage.setItem('linguo-journal', JSON.stringify(journal)); } catch (e) { }
+    window.openAuthModal = (tab = 'login') => {
+      const modal = document.getElementById('authModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        switchAuthTab(tab);
+      }
+    };
+
+    window.closeAuthModal = () => {
+      const modal = document.getElementById('authModal');
+      if (modal) modal.style.display = 'none';
+    };
+
+    window.handleModalOverlayClick = (e) => {
+      if (e.target.id === 'authModal') closeAuthModal();
+    };
+
+    window.switchAuthTab = (tab) => {
+      const tabLogin = document.getElementById('authTabLogin');
+      const tabSignup = document.getElementById('authTabSignup');
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const modalTitle = document.getElementById('authModalTitle');
+      const modalSub = document.getElementById('authModalSub');
+
+      clearAuthMsgs();
+
+      if (tab === 'login') {
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        modalTitle.textContent = 'Sign In to Linguo';
+        modalSub.textContent = 'Save your translation history and access your personal journal anywhere.';
+      } else {
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+        signupForm.style.display = 'block';
+        loginForm.style.display = 'none';
+        modalTitle.textContent = 'Create Free Account';
+        modalSub.textContent = 'Sign up to automatically save your translation history and access your journal!';
+      }
+    };
+
+    function clearAuthMsgs() {
+      const err = document.getElementById('authErrorMsg');
+      const succ = document.getElementById('authSuccessMsg');
+      if (err) { err.style.display = 'none'; err.textContent = ''; }
+      if (succ) { succ.style.display = 'none'; succ.textContent = ''; }
+    }
+
+    function showAuthError(msg) {
+      const err = document.getElementById('authErrorMsg');
+      if (err) { err.textContent = msg; err.style.display = 'block'; }
+    }
+
+    function showAuthSuccess(msg) {
+      const succ = document.getElementById('authSuccessMsg');
+      if (succ) { succ.textContent = msg; succ.style.display = 'block'; }
+    }
+
+    window.handleLoginSubmit = (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+
+      if (!email || !password) {
+        showAuthError('Please enter both email and password.');
+        return;
+      }
+
+      const users = getRegisteredUsers();
+      const found = users.find(u => u.email.toLowerCase() === email);
+
+      if (!found || found.password !== password) {
+        showAuthError('Invalid email or password. If you do not have an account, click Sign Up.');
+        return;
+      }
+
+      currentUser = { email: found.email, name: found.name };
+      localStorage.setItem('linguo-current-user', JSON.stringify(currentUser));
+      showAuthSuccess('Signed in successfully! Loading your journal...');
+
+      setTimeout(() => {
+        closeAuthModal();
+        updateAuthUI();
+      }, 600);
+    };
+
+    window.handleSignupSubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+      const password = document.getElementById('signupPassword').value;
+
+      if (!name || !email || !password) {
+        showAuthError('Please fill in all fields.');
+        return;
+      }
+
+      const users = getRegisteredUsers();
+      if (users.some(u => u.email.toLowerCase() === email)) {
+        showAuthError('An account with this email already exists. Please sign in.');
+        return;
+      }
+
+      const newUser = { name, email, password };
+      users.push(newUser);
+      saveRegisteredUsers(users);
+
+      currentUser = { email: newUser.email, name: newUser.name };
+      localStorage.setItem('linguo-current-user', JSON.stringify(currentUser));
+
+      showAuthSuccess('Account created successfully! Your translations will now be saved.');
+
+      setTimeout(() => {
+        closeAuthModal();
+        updateAuthUI();
+      }, 600);
+    };
+
+    window.logoutUser = () => {
+      currentUser = null;
+      localStorage.removeItem('linguo-current-user');
+      updateAuthUI();
+    };
+
+    // ── Translation Journal (Auth Gated) ──────────────────────
+    function getUserJournalKey() {
+      if (!currentUser) return null;
+      return 'linguo-journal-' + currentUser.email.toLowerCase();
+    }
+
+    function getJournal() {
+      const key = getUserJournalKey();
+      if (!key) return [];
+      try {
+        return JSON.parse(localStorage.getItem(key) || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveJournal(journalList) {
+      const key = getUserJournalKey();
+      if (!key) return;
+      try {
+        localStorage.setItem(key, JSON.stringify(journalList));
+      } catch (e) { }
+    }
+
+    function addToJournal(src, tgt, srcLang, tgtLang) {
+      // Translations are ONLY saved if user is signed in!
+      if (!currentUser) return;
+
+      let journal = getJournal();
+      journal.unshift({ id: Date.now(), src, tgt, srcLang, tgtLang, ts: new Date().toISOString(), fav: false });
+      if (journal.length > 15) journal = journal.slice(0, 15);
+      saveJournal(journal);
+      renderJournal();
     }
 
     function journalPairLabel(item) {
       if (item.srcLang && item.tgtLang) {
         return item.srcLang.toUpperCase() + ' &#8594; ' + item.tgtLang.toUpperCase();
       }
-      // Legacy entries saved before multi-language support
-      if (item.dir) return item.dir === 'en' ? 'EN &#8594; FR' : 'FR &#8594; EN';
       return '';
     }
 
@@ -2238,44 +2963,91 @@
     }
 
     function renderJournal() {
-      const list = document.getElementById('journalList');
-      if (journal.length === 0) {
-        list.innerHTML = '<div class="journal-empty">No translations yet. Start translating to build your journal!</div>';
+      const container = document.getElementById('journalSection');
+      if (!container) return;
+
+      if (!currentUser) {
+        container.innerHTML = `
+          <div class="journal-title">
+            &#128214; Recent Translations
+          </div>
+          <div class="journal-locked-card">
+            <div class="locked-badge">&#128274; Account Required to Save History</div>
+            <h3 class="locked-title">Your translations are not being saved</h3>
+            <p class="locked-desc">
+              You are currently translating as a <strong>Guest</strong>. Feel free to translate as much as you like, but your translation history will not be saved.
+              <br /><br />
+              Sign in or create a free account to save your translations to your personal journal!
+            </p>
+            <div class="locked-actions">
+              <button class="btn-auth-primary" onclick="openAuthModal('signup')">Create Free Account</button>
+              <button class="btn-auth-secondary" onclick="openAuthModal('login')">Sign In</button>
+            </div>
+          </div>
+        `;
         return;
       }
-      list.innerHTML = journal.map(item => `
-        <div class="journal-item" id="ji-${item.id}">
-          <div class="journal-texts">
-            <div class="journal-src">${escHtml(item.src)}</div>
-            <div class="journal-tgt">${escHtml(item.tgt)}</div>
-            <div class="journal-meta">${journalPairLabel(item)} &middot; ${timeAgo(item.ts)}</div>
-          </div>
-          <div class="journal-actions">
-            <button class="j-btn fav ${item.fav ? 'active' : ''}" onclick="toggleFav(${item.id})" title="Favourite">&#9734;</button>
-            <button class="j-btn" onclick="copyJ(${item.id})" title="Copy">&#128203;</button>
-            <button class="j-btn del" onclick="deleteJ(${item.id})" title="Delete">&#128465;</button>
-          </div>
+
+      const journal = getJournal();
+      container.innerHTML = `
+        <div class="journal-title">
+          &#128214; Recent Translations (${journal.length})
+          <button class="action-btn" id="clearJournalBtn" style="margin-left:auto;font-size:0.78rem;padding:5px 12px;" onclick="clearUserJournal()">Clear All</button>
         </div>
-      `).join('');
+        <div id="journalList" class="journal-list">
+          ${journal.length === 0 ? `
+            <div class="journal-empty">No translations saved yet. Translate text above to build your journal!</div>
+          ` : journal.map(item => `
+            <div class="journal-item" id="ji-${item.id}">
+              <div class="journal-texts">
+                <div class="journal-src">${escHtml(item.src)}</div>
+                <div class="journal-tgt">${escHtml(item.tgt)}</div>
+                <div class="journal-meta">${journalPairLabel(item)} &middot; ${timeAgo(item.ts)}</div>
+              </div>
+              <div class="journal-actions">
+                <button class="j-btn fav ${item.fav ? 'active' : ''}" onclick="toggleFav(${item.id})" title="Favourite">&#9734;</button>
+                <button class="j-btn" onclick="copyJ(${item.id})" title="Copy">&#128203;</button>
+                <button class="j-btn del" onclick="deleteJ(${item.id})" title="Delete">&#128465;</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
     }
 
-    window.toggleFav = (id) => {
-      const item = journal.find(j => j.id === id);
-      if (item) { item.fav = !item.fav; saveJournal(); renderJournal(); }
-    };
-    window.copyJ = (id) => {
-      const item = journal.find(j => j.id === id);
-      if (item) try { navigator.clipboard.writeText(item.tgt); } catch (e) { }
-    };
-    window.deleteJ = (id) => {
-      journal = journal.filter(j => j.id !== id);
-      saveJournal();
+    window.clearUserJournal = () => {
+      if (!currentUser) return;
+      saveJournal([]);
       renderJournal();
     };
 
-    document.getElementById('clearJournalBtn').addEventListener('click', () => {
-      journal = []; saveJournal(); renderJournal();
-    });
+    window.toggleFav = (id) => {
+      if (!currentUser) return;
+      let journal = getJournal();
+      const item = journal.find(j => j.id === id);
+      if (item) {
+        item.fav = !item.fav;
+        saveJournal(journal);
+        renderJournal();
+      }
+    };
+
+    window.copyJ = (id) => {
+      let journal = getJournal();
+      const item = journal.find(j => j.id === id);
+      if (item) try { navigator.clipboard.writeText(item.tgt); } catch (e) { }
+    };
+
+    window.deleteJ = (id) => {
+      if (!currentUser) return;
+      let journal = getJournal();
+      journal = journal.filter(j => j.id !== id);
+      saveJournal(journal);
+      renderJournal();
+    };
+
+    // Initialize Auth UI on load
+    updateAuthUI();
 
     function escHtml(str) {
       return String(str)
@@ -2451,4 +3223,58 @@
       }
     });
   </script>
+  <!-- ─── Auth Modal ──────────────────────────────────────────── -->
+  <div class="auth-modal-overlay" id="authModal" style="display:none;" onclick="handleModalOverlayClick(event)">
+    <div class="auth-modal-card">
+      <button class="auth-modal-close" onclick="closeAuthModal()" aria-label="Close modal">&times;</button>
+      
+      <div class="auth-modal-header">
+        <div class="auth-modal-icon">&#128274;</div>
+        <h3 id="authModalTitle">Sign In to Linguo</h3>
+        <p id="authModalSub">Save your translation history and access your personal journal anywhere.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="authTabLogin" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="auth-tab" id="authTabSignup" onclick="switchAuthTab('signup')">Create Account</button>
+      </div>
+
+      <div id="authErrorMsg" class="auth-error-msg" style="display:none;"></div>
+      <div id="authSuccessMsg" class="auth-success-msg" style="display:none;"></div>
+
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)" style="display:block;">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="name@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="auth-submit-btn">Sign In to Account</button>
+        <div class="auth-switch-prompt">
+          Don't have an account? <a href="#" onclick="event.preventDefault(); switchAuthTab('signup');">Sign up for free</a>
+        </div>
+      </form>
+
+      <form id="signupForm" onsubmit="handleSignupSubmit(event)" style="display:none;">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="e.g. Priyanshi" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" placeholder="name@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="Create a strong password" required autocomplete="new-password" minlength="4" />
+        </div>
+        <button type="submit" class="auth-submit-btn">Create Account & Save History</button>
+        <div class="auth-switch-prompt">
+          Already have an account? <a href="#" onclick="event.preventDefault(); switchAuthTab('login');">Sign in</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>

@@ -254,21 +254,23 @@ _gemini_client = None
 _gemini_import_error = None
 try:
     from google import genai as google_genai
-    if os.environ.get("GEMINI_API_KEY"):
-        _gemini_client = google_genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 except ImportError as e:
-    _gemini_import_error = str(e)
+    _gemini_import_error = f"'google-genai' package not installed: {e}"
+else:
+    try:
+        if os.environ.get("GEMINI_API_KEY"):
+            _gemini_client = google_genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    except Exception as e:
+        # A malformed/invalid key must not crash the whole app at startup —
+        # it should just disable the LLM engine with a clear reason.
+        _gemini_import_error = f"failed to initialize Gemini client: {e}"
 
 LLM_MODEL_NAME = "gemini-2.5-flash"
 
 
 def rephrase_with_llm(text: str, lang_name: str) -> str:
     if _gemini_client is None:
-        reason = (
-            "the 'google-genai' package is not installed"
-            if _gemini_import_error
-            else "GEMINI_API_KEY is not set"
-        )
+        reason = _gemini_import_error or "GEMINI_API_KEY is not set"
         raise HTTPException(
             status_code=503,
             detail=f"LLM rephrase engine is not configured ({reason}).",
@@ -335,10 +337,10 @@ class RephraseRequest(BaseModel):
         description="Language code (see /languages). Omit to auto-detect.",
     )
     engine: str = Field(
-        default="backtranslation",
-        description="One of: 'backtranslation' (any language), "
-                    "'paraphrase' (English only, T5-based), "
-                    "'llm' (any language, needs GEMINI_API_KEY).",
+        default="llm",
+        description="One of: 'llm' (any language, needs GEMINI_API_KEY), "
+                    "'backtranslation' (any language, free/local), "
+                    "'paraphrase' (English only, T5-based, free/local).",
     )
 
 
